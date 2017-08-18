@@ -1,4 +1,4 @@
-package com.example.demo.datasource.mongodb.domain;
+package com.example.demo.datasource.sqlserver.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "mongo_table")
-public class MongoDB {
-
+@Table(name = "sqlserver_table")
+public class SQLServer {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

@@ -17,25 +17,25 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "mongoDBEntityManagerFactory", transactionManagerRef = "mongoDBTransactionManager", basePackages = {
-		"com.example.demo.datasource.mongodb.repo" })
-public class MongoDBConfig {
+@EnableJpaRepositories(entityManagerFactoryRef = "sqlServerEntityManagerFactory", transactionManagerRef = "sqlServerTransactionManager", basePackages = {
+		"com.example.demo.datasource.sqlserver.repo" })
+public class SQLServerDBConfig {
 
-	@Bean(name = "mongoDBDataSource")
-	@ConfigurationProperties(prefix = "mongodb.datasource")
+	@Bean(name = "sqlServerDataSource")
+	@ConfigurationProperties(prefix = "sqlserver.datasource")
 	public DataSource dataSource() {
 		return DataSourceBuilder.create().build();
 	}
 
-	@Bean(name = "mongoDBEntityManagerFactory")
-	public LocalContainerEntityManagerFactoryBean mongoDBEntityManagerFactory(EntityManagerFactoryBuilder builder,
-			@Qualifier("mongoDBDataSource") DataSource dataSource) {
-		return builder.dataSource(dataSource).packages("com.example.demo.datasource.mongodb.domain").persistenceUnit("MongoDB").build();
+	@Bean(name = "sqlServerEntityManagerFactory")
+	public LocalContainerEntityManagerFactoryBean sqlServerEntityManagerFactory(EntityManagerFactoryBuilder builder,
+			@Qualifier("sqlServerDataSource") DataSource dataSource) {
+		return builder.dataSource(dataSource).packages("com.example.demo.datasource.sqlserver.domain").persistenceUnit("SQLServer").build();
 	}
 
-	@Bean(name = "mongoDBTransactionManager")
-	public PlatformTransactionManager mongoDBTransactionManager(
-			@Qualifier("mongoDBEntityManagerFactory") EntityManagerFactory mongoDBEntityManagerFactory) {
-		return new JpaTransactionManager(mongoDBEntityManagerFactory);
+	@Bean(name = "sqlServerTransactionManager")
+	public PlatformTransactionManager sqlServerTransactionManager(
+			@Qualifier("sqlServerEntityManagerFactory") EntityManagerFactory sqlServerEntityManagerFactory) {
+		return new JpaTransactionManager(sqlServerEntityManagerFactory);
 	}
 }

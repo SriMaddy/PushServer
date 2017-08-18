@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.datasource.mongodb.domain.MongoDB;
-import com.example.demo.datasource.mongodb.repo.MongoDBRepo;
+import com.example.demo.datasource.sqlserver.domain.SQLServer;
+import com.example.demo.datasource.sqlserver.repo.SQLServerRepo;
 import com.example.demo.datasource.mysql.domain.MySql;
 import com.example.demo.datasource.mysql.repo.MySqlRepo;
 import com.google.gson.Gson;
@@ -22,7 +22,7 @@ public class DualDBController {
 	private MySqlRepo mysqlRepo;
 
 	@Autowired
-	private MongoDBRepo mongoRepo;
+	private SQLServerRepo sqlServerRepo;
 
 	@RequestMapping(value = "/saveInTest1DB", method = org.springframework.web.bind.annotation.RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MySql> saveNameInMySqlDB(@RequestBody String body) {
@@ -33,11 +33,11 @@ public class DualDBController {
 	}
 
 	@RequestMapping(value = "/saveInTest2DB", method = org.springframework.web.bind.annotation.RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<MongoDB> saveNameInMongoDB(@RequestBody String body) {
+	public ResponseEntity<SQLServer> saveNameInSqlServerDB(@RequestBody String body) {
 		Gson gson = new Gson();
-		MongoDB mongodb = gson.fromJson(body, MongoDB.class);
-		mongodb = mongoRepo.save(mongodb);
-		return new ResponseEntity<>(mongodb, HttpStatus.CREATED);
+		SQLServer sqlServerDB = gson.fromJson(body, SQLServer.class);
+		sqlServerDB = sqlServerRepo.save(sqlServerDB);
+		return new ResponseEntity<>(sqlServerDB, HttpStatus.CREATED);
 	}
 
 }
