@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "sqlserver.datasource.url",
+    "type": "java.lang.String",
+    "description": "jdbc:sqlserver://103.230.86.33:1433;databaseName=pushdb"
+  },
+  {
+    "name": "sqlserver.datasource.username",
+    "type": "java.lang.String",
+    "description": "sa"
+  },
+  {
+    "name": "sqlserver.datasource.password",
+    "type": "java.lang.String",
+    "description": "Welcome"
+  },
+  {
+    "name": "sqlserver.datasource.driver-class-name",
+    "type": "java.lang.String",
+    "description": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  }
+]}
