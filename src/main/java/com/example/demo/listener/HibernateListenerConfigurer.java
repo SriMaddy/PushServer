@@ -19,7 +19,6 @@ public class HibernateListenerConfigurer {
 
 	@PersistenceUnit(unitName = "MySql")
     private EntityManagerFactory emf;
-//	private LocalContainerEntityManagerFactoryBean emf;
 	
 	@PersistenceUnit(unitName = "SQLServer")
     private EntityManagerFactory emf1;
