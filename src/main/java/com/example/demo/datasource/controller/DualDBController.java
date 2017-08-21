@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.datasource.sqlserver.domain.SQLServer;
+import com.example.demo.datasource.sqlserver.domain.SQLServerTestTable;
 import com.example.demo.datasource.sqlserver.repo.SQLServerRepo;
+import com.example.demo.datasource.sqlserver.repo.SQLServerTestTableRepo;
 import com.example.demo.datasource.mysql.domain.MySql;
 import com.example.demo.datasource.mysql.repo.MySqlRepo;
 import com.google.gson.Gson;
@@ -24,6 +26,9 @@ public class DualDBController {
 	@Autowired
 	private SQLServerRepo sqlServerRepo;
 
+	@Autowired
+	private SQLServerTestTableRepo sqlServerTestTableRepo;
+
 	@RequestMapping(value = "/saveInTest1DB", method = org.springframework.web.bind.annotation.RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MySql> saveNameInMySqlDB(@RequestBody String body) {
 		Gson gson = new Gson();
@@ -37,6 +42,14 @@ public class DualDBController {
 		Gson gson = new Gson();
 		SQLServer sqlServerDB = gson.fromJson(body, SQLServer.class);
 		sqlServerDB = sqlServerRepo.save(sqlServerDB);
+		return new ResponseEntity<>(sqlServerDB, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/saveInTest2TableDB", method = org.springframework.web.bind.annotation.RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<SQLServerTestTable> saveNameInSqlServerTestTableDB(@RequestBody String body) {
+		Gson gson = new Gson();
+		SQLServerTestTable sqlServerDB = gson.fromJson(body, SQLServerTestTable.class);
+		sqlServerDB = sqlServerTestTableRepo.save(sqlServerDB);
 		return new ResponseEntity<>(sqlServerDB, HttpStatus.CREATED);
 	}
 
