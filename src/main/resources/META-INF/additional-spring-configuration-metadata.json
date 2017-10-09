@@ -2,7 +2,7 @@
   {
     "name": "sqlserver.datasource.url",
     "type": "java.lang.String",
-    "description": "jdbc:sqlserver://103.230.86.33:1433;databaseName=pushdb"
+    "description": "jdbc:sqlserver://103.230.86.33:1433;databaseName=FMS4.0"
   },
   {
     "name": "sqlserver.datasource.username",

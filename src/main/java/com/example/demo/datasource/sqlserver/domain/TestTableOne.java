@@ -8,30 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sqlserver_test_table")
-public class SQLServerTestTable {
+@Table(name = "test_table")
+public class TestTableOne {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	private long id;
-
+	
 	@Column(name = "name", nullable = true)
 	private String name;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
+	
 	public void setName(String name) {
-		this.name = name;
+		this.name  = name;
+	}
+	
+	public long getId() {
+		return this.id;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 }
