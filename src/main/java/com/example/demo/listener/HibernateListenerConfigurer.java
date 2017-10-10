@@ -20,9 +20,6 @@ public class HibernateListenerConfigurer {
 	@PersistenceUnit(unitName = "MySql")
     private EntityManagerFactory emf;
 	
-	@PersistenceUnit(unitName = "SQLServer")
-    private EntityManagerFactory emf1;
-	
 	@Autowired
 	private DBEventListener listener;
 	
@@ -30,15 +27,11 @@ public class HibernateListenerConfigurer {
     public void init() {
 		System.out.println("HIBERNATE CONFIGURER INIT");
 		LOGGER.debug("HIBERNATE CONFIGURER INIT");
-//		SessionFactoryImpl sessionFactory = emf.getObject().unwrap(SessionFactoryImpl.class);
         SessionFactoryImpl sessionFactory = emf.unwrap(SessionFactoryImpl.class);
-        SessionFactoryImpl sessionFactory1 = emf1.unwrap(SessionFactoryImpl.class);
         
         EventListenerRegistry registry = sessionFactory.getServiceRegistry().getService(EventListenerRegistry.class);
-        EventListenerRegistry registry1 = sessionFactory1.getServiceRegistry().getService(EventListenerRegistry.class);
         
         registry.getEventListenerGroup(EventType.POST_INSERT).appendListener(listener);
-        registry1.getEventListenerGroup(EventType.POST_INSERT).appendListener(listener);
 //        registry.getEventListenerGroup(EventType.POST_UPDATE).appendListener(listener);
 //        registry.getEventListenerGroup(EventType.POST_DELETE).appendListener(listener);
     }
