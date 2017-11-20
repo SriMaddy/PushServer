@@ -10,6 +10,6 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
 	public String index() {
-		return "The server is running successfully on port 8081 in tomcat-apache.";
+		return "The server is running successfully on port 8080 in tomcat-apache.";
 	}
 }
